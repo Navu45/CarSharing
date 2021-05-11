@@ -1,0 +1,34 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <title>Getting Started: Serving Web Content</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+<form method="post" action="/booking/create">
+    <label>
+        <input type="text" name="serviceCost" placeholder="Service cost">
+    </label>
+    <button type="submit">Book the car</button>
+</form>
+<table>
+    <tr>
+        <th>Started in</th>
+        <th>Finished in</th>
+        <th>Service cost</th>
+        <th>Activity</th>
+    </tr>
+    <tr th:each="booking : ${bookings}">
+        <td th:text="${booking.getStartTime()}">Onions</td>
+        <td th:text="${booking.getFinishTime() == null ? '---' : booking.getFinishTime()}">2.41</td>
+        <td th:text="${booking.getServiceCost()}">8.00 per minute</td>
+        <td th:text="${booking.isFinished() ? 'inactive' : 'active'}">yes</td>
+        <td>
+            <form method="post" th:action="@{/booking/close/{id} (id = ${booking.getId()})}">
+                <button type="submit">Close</button>
+            </form>
+        </td>
+    </tr>
+</table>
+</body>
+</html>
