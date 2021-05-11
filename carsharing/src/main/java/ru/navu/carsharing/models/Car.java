@@ -5,9 +5,9 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import java.util.Collection;
-import java.util.List;
 
-
+@Entity
+@Table(name = "cars")
 @Getter
 @Setter
 public class Car {

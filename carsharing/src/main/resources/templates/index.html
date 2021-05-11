@@ -5,5 +5,8 @@
 </head>
 <body>
 <h1>Welcome!</h1>
+<form th:action="@{/logout}" method="post">
+    <input type="submit" value="Sign Out"/>
+</form>
 <a href="/bookings">Your bookings</a>
 </body>
