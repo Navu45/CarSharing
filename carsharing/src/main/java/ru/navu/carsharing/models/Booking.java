@@ -5,7 +5,6 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 
 @Entity
 @Table(name = "bookings")
@@ -23,6 +22,8 @@ public class Booking {
     private boolean finished;
     @Column(name = "service_cost")
     private double serviceCost;
+    @ManyToOne
+    private User user;
 
     /*@ManyToOne
     private Car car;

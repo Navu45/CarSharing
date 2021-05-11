@@ -1,4 +1,4 @@
-package ru.navu.carsharing.services.user;
+package ru.navu.carsharing.services.security.user;
 
 
 import ru.navu.carsharing.models.User;

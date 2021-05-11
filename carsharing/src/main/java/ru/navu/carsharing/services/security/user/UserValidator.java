@@ -1,4 +1,4 @@
-package ru.navu.carsharing.services.user;
+package ru.navu.carsharing.services.security.user;
 
 import org.springframework.stereotype.Service;
 import org.springframework.validation.Errors;
@@ -35,11 +35,11 @@ public class UserValidator implements Validator {
         ValidationUtils.rejectIfEmptyOrWhitespace(errors, "password", "message.loginform.required");
 
         if (user.getPassword().length() < 8 || user.getPassword().length() > 32) {
-            errors.rejectValue("username", "message.loginform.size.password");
+            errors.rejectValue("password", "message.loginform.size.password");
         }
 
         if (!user.getConfirmPassword().equals(user.getPassword())) {
-            errors.rejectValue("username", "message.loginform.different.password");
+            errors.rejectValue("password", "message.loginform.different.password");
         }
     }
 }

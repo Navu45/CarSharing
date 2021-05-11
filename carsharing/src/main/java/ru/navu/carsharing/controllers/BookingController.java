@@ -1,46 +1,42 @@
 package ru.navu.carsharing.controllers;
 
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import ru.navu.carsharing.models.Booking;
-import ru.navu.carsharing.repositories.BookingRepository;
+import ru.navu.carsharing.models.User;
+import ru.navu.carsharing.services.order.BookingServiceImpl;
 
 import java.time.LocalDateTime;
 
 @Controller
 public class BookingController {
 
-    private BookingRepository bookingRepository;
+    private final BookingServiceImpl service;
 
-    public BookingController(BookingRepository bookingRepository) {
-        this.bookingRepository = bookingRepository;
+    public BookingController(BookingServiceImpl service) {
+        this.service = service;
     }
 
     @GetMapping("/bookings")
-    public String getAllBookings(Model model) {
-        model.addAttribute("bookings", bookingRepository.findAll());
+    public String getAllBookings(
+            @AuthenticationPrincipal User user,
+            Model model) {
+        model.addAttribute("bookings", service.getAllBookings(user));
         return "booking";
     }
 
     @PostMapping("/booking/create")
-    public String createBooking(@RequestParam double serviceCost) {
-        Booking booking = new Booking();
-        booking.setServiceCost(serviceCost);
-        booking.setStartTime(LocalDateTime.now());
-        bookingRepository.save(booking);
-
+    public String createBooking(
+            @AuthenticationPrincipal User user,
+            @RequestParam double serviceCost) {
+        service.save(serviceCost, user);
         return "redirect:/bookings";
     }
 
     @PostMapping("/booking/close/{id}")
     public String closeTheBooking(@PathVariable Long id) {
-        Booking booking = bookingRepository.getOne(id);
-        if (booking.isFinished())
-            return "redirect:/bookings";
-        booking.setFinished(true);
-        booking.setFinishTime(LocalDateTime.now());
-        bookingRepository.save(booking);
+        service.finish(id);
         return "redirect:/bookings";
     }
 

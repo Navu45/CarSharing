@@ -19,10 +19,10 @@
         <th>Activity</th>
     </tr>
     <tr th:each="booking : ${bookings}">
-        <td th:text="${booking.getStartTime()}">Onions</td>
-        <td th:text="${booking.getFinishTime() == null ? '---' : booking.getFinishTime()}">2.41</td>
-        <td th:text="${booking.getServiceCost()}">8.00 per minute</td>
-        <td th:text="${booking.isFinished() ? 'inactive' : 'active'}">yes</td>
+        <td th:text="${booking.getStartTime()}"></td>
+        <td th:text="${booking.getFinishTime() == null ? '---' : booking.getFinishTime()}"></td>
+        <td th:text="${booking.getServiceCost()}"></td>
+        <td th:text="${booking.isFinished() ? 'inactive' : 'active'}"></td>
         <td>
             <form method="post" th:action="@{/booking/close/{id} (id = ${booking.getId()})}">
                 <button type="submit">Close</button>

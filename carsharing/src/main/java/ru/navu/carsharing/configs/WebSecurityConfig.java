@@ -8,16 +8,14 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import ru.navu.carsharing.services.user.UserDetailServiceImpl;
-
-import javax.sql.DataSource;
+import ru.navu.carsharing.services.security.user.UserDetailServiceImpl;
 
 @Configuration
 @EnableWebSecurity
 public class WebSecurityConfig extends
         WebSecurityConfigurerAdapter {
 
-    private UserDetailServiceImpl userDetailService;
+    private final UserDetailServiceImpl userDetailService;
 
     public WebSecurityConfig(UserDetailServiceImpl userDetailService) {
         this.userDetailService = userDetailService;
