@@ -1,0 +1,18 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <title>Getting Started: Serving Web Content</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+<form th:action="@{/user/update}" method="post">
+    <input type="text" name="username" th:value="${user.getUsername()}">
+    <span th:each="role : ${roles}" >
+        <span th:text="${role}"></span>
+        <input type="checkbox" th:name = "${role}" th:checked="${user.getAuthorities().contains(role)}">
+    </span>
+    <input type="hidden" name="user_id" th:value="${user.getId()}">
+    <button type="submit">Save</button>
+</form>
+</body>
+</html>

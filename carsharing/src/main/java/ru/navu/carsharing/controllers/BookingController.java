@@ -7,8 +7,6 @@ import org.springframework.web.bind.annotation.*;
 import ru.navu.carsharing.models.User;
 import ru.navu.carsharing.services.order.BookingServiceImpl;
 
-import java.time.LocalDateTime;
-
 @Controller
 public class BookingController {
 
@@ -23,7 +21,7 @@ public class BookingController {
             @AuthenticationPrincipal User user,
             Model model) {
         model.addAttribute("bookings", service.getAllBookings(user));
-        return "booking";
+        return "bookings";
     }
 
     @PostMapping("/booking/create")

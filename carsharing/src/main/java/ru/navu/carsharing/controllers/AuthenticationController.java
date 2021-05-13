@@ -7,11 +7,15 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import ru.navu.carsharing.models.Role;
 import ru.navu.carsharing.models.User;
 import ru.navu.carsharing.repositories.UserRepository;
 import ru.navu.carsharing.services.security.user.UserService;
 import ru.navu.carsharing.services.security.user.UserValidator;
 import ru.navu.carsharing.services.security.SecurityService;
+
+import java.util.HashSet;
+import java.util.Set;
 
 @Controller
 public class AuthenticationController {
@@ -47,7 +51,9 @@ public class AuthenticationController {
         {
             return "registration";
         }
-
+        Set<Role> rolesSet = new HashSet<>();
+        rolesSet.add(Role.USER);
+        userForm.setRoles(rolesSet);
         userService.save(userForm);
         securityService.autoLogin(userForm.getUsername(), userForm.getConfirmPassword());
 
