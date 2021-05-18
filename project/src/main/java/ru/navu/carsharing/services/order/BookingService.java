@@ -7,8 +7,7 @@ import ru.navu.carsharing.models.User;
 import java.util.List;
 
 public interface BookingService {
-    void save(double serviceCost, User user, Car car);
-    void finish(Long id);
+    Booking save(double serviceCost, User user, Car car);
 
     List<Booking> getAllBookings(User user);
 }

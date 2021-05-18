@@ -1,5 +1,5 @@
 <#import 'layout.ftl' as page>
-<@page.layout false>
+<@page.layout false "Sign in | CarSharingApp">
     <form method="POST" action="/login">
         <h2>Log in</h2>
         <div class="mb-3 mt-3">

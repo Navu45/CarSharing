@@ -21,17 +21,23 @@ public class BookingServiceImpl implements BookingService{
     }
 
     @Override
-    public void save(double serviceCost, User user, Car car) {
+    public Booking save(double serviceCost, User user, Car car) {
         Booking booking = new Booking();
         booking.setServiceCost(serviceCost);
         booking.setStartTime(LocalDateTime.now());
         booking.setUser(user);
-        booking.setCarNumber(car.getCarNumber());
-        repository.save(booking);
+        booking.setCar(car);
+        return repository.save(booking);
     }
 
-    @Override
-    public void finish(Long id) {
+    public void finishWithCar(Car car) {
+        List<Booking> bookings = repository.findBookingByCarAndFinishedFalse(car);
+        bookings.get(0).setFinished(true);
+        bookings.get(0).setFinishTime(LocalDateTime.now());
+        repository.save(bookings.get(0));
+    }
+
+    public void finishWithBooking(Long id) {
         Booking booking = repository.getOne(id);
         if (!booking.isFinished()) {
             booking.setFinished(true);

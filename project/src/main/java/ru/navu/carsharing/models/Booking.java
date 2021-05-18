@@ -23,8 +23,8 @@ public class Booking {
     private boolean finished;
     @Column(name = "service_cost")
     private double serviceCost;
-    @Column
-    private String carNumber;
+    @ManyToOne
+    private Car car;
     @ManyToOne
     private User user;
     @Transient
@@ -36,7 +36,10 @@ public class Booking {
      */
 
     public String getFinishTime() {
-        return finishTime.format(FORMATTER);
+        if (finishTime != null)
+            return finishTime.format(FORMATTER);
+        else
+            return null;
     }
 
     public String getStartTime() {

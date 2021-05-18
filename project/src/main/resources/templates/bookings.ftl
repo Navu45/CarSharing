@@ -1,5 +1,5 @@
 <#import "layout.ftl" as page>
-<@page.layout false>
+<@page.layout false "Your trips | CarSharingApp">
     <table class="table">
         <thead>
         <tr>
@@ -21,7 +21,7 @@
                 <td>${booking.getServiceCost()}</td>
                 <td>${booking.isFinished()?then('inactive', 'active')}</td>
                 <td>
-                    <form method="post" action="/booking/close/${booking.getId()}">
+                    <form method="post" action="/booking/close_b/${booking.getId()}">
                         <button class="btn btn-primary mb-2" type="submit">Close</button>
                     </form>
                 </td>

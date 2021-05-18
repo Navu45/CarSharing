@@ -1,5 +1,6 @@
 package ru.navu.carsharing.controllers;
 
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -110,4 +111,5 @@ public class AuthenticationController {
         }
         return "login";
     }
+
 }

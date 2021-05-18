@@ -19,5 +19,6 @@ public class Car {
     private double latitude;
     private double longitude;
     private String carNumber;
+    private int fuel;
 
 }

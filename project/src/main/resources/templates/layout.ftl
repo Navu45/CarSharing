@@ -1,7 +1,6 @@
-
-<#macro layout isHomePage>
+<#macro layout isHomePage title>
     <!DOCTYPE html>
-    <html xmlns:th="http://www.thymeleaf.org" lang="en">
+    <html lang="en">
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -22,16 +21,38 @@
 
         <#if isHomePage>
             <style type="text/css">
-                /* Set the size of the div element that contains the map */
+                /* Always set the map height explicitly to define the size of the div
+       * element that contains the map. */
                 #map {
                     height: 100%;
-                    /* The height is 400 pixels */
-                    width: 100%;
-                    /* The width is the width of the web page */
+                }
+
+                /* Optional: Makes the sample page fill the window. */
+                html,
+                body {
+                    height: 100%;
+                    margin: 0;
+                    padding: 0;
+                }
+
+                .custom-map-control-button {
+                    background-color: #fff;
+                    border: 0;
+                    border-radius: 2px;
+                    box-shadow: 0 1px 4px -1px rgba(0, 0, 0, 0.3);
+                    cursor: pointer;
+                    margin: 10px;
+                    padding: 0 0.5em;
+                    height: 40px;
+                    font: 400 18px Roboto, Arial, sans-serif;
+                    overflow: hidden;
+                }
+                .custom-map-control-button:hover {
+                    background: #ebebeb;
                 }
             </style>
         </#if>
-        <title th:text="title"></title>
+        <title>${title}</title>
     </head>
     <body>
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
@@ -69,10 +90,10 @@
     </nav>
     <#if isHomePage>
         <#nested>
-    <#else>
-    <div class="container mt-5">
-        <#nested>
-    </div>
+        <#else >
+        <div class="container mt-5">
+            <#nested>
+        </div>
     </#if>
     </body>
     </html>

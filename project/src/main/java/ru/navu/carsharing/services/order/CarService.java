@@ -29,4 +29,19 @@ public class CarService {
     public void addUserToCar(Booking booking, Car car) {
         car.getRecentUsers().add(booking);
     }
+
+    public void init(double lat, double lng) {
+        for (int i = 0; i < 7; i++) {
+            Car car = new Car();
+            car.setCarNumber("A111BC197");
+            car.setLatitude(lat + Math.random() * 0.006 * Math.pow(-1.0, Math.round(Math.random() * 10)));
+            car.setLongitude(lng + Math.random() * 0.006 * Math.pow(-1.0, Math.round(Math.random() * 10)));
+            car.setFuel(80);
+            save(car);
+        }
+    }
+
+    public Car getCar(Long id) {
+        return repository.getOne(id);
+    }
 }

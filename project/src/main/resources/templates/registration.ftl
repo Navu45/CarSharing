@@ -1,6 +1,6 @@
 <#import "layout.ftl" as page/>
 <#import 'spring.ftl' as spring>
-<@page.layout false>
+<@page.layout false "Sign up | CarSharingApp">
     <form method="post" action="/registration">
         <h2>Create your account</h2>
 

@@ -24,21 +24,12 @@ public class CarController {
         return carService.getNearbyCars(lat, lng);
     }
 
-
-    @PreAuthorize("hasAuthority('ADMIN')")
     @PostMapping("init/{lat}/{lng}")
     public void init(@PathVariable double lat,
                      @PathVariable double lng) {
-        for (int i = 0; i < 7; i++) {
-            Car car = new Car();
-            car.setCarNumber("A111BC197");
-            car.setLatitude(lat + Math.random() * 0.006 * Math.pow(-1.0, Math.round(Math.random() * 10)));
-            car.setLongitude(lng + Math.random() * 0.006 * Math.pow(-1.0, Math.round(Math.random() * 10)));
-            carService.save(car);
-        }
+        carService.init(lat, lng);
     }
 
-    @PreAuthorize("hasAuthority('EMPLOYEE')")
     @PostMapping("save")
     public void save(@RequestParam Car car) {
         carService.save(car);

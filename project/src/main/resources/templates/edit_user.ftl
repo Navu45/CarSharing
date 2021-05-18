@@ -1,5 +1,5 @@
 <#import "layout.ftl" as page>
-<@page.layout false>
+<@page.layout false "Edit user (for admin) | CarSharingApp">
     <form action="/user/update" method="post">
         <div class="form-group">
             <label>
