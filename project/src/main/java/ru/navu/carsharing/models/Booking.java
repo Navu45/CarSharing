@@ -23,6 +23,8 @@ public class Booking {
     private boolean finished;
     @Column(name = "service_cost")
     private double serviceCost;
+    @Column
+    private String carNumber;
     @ManyToOne
     private User user;
     @Transient

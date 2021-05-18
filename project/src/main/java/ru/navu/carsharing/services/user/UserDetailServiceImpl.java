@@ -1,4 +1,4 @@
-package ru.navu.carsharing.services.security.user;
+package ru.navu.carsharing.services.user;
 
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;

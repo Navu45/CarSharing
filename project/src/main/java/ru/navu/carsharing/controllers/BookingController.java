@@ -3,16 +3,21 @@ package ru.navu.carsharing.controllers;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import ru.navu.carsharing.models.Car;
 import ru.navu.carsharing.models.User;
+import ru.navu.carsharing.services.order.BookingService;
 import ru.navu.carsharing.services.order.BookingServiceImpl;
 
 @Controller
 public class BookingController {
 
-    private final BookingServiceImpl service;
+    private final BookingService service;
 
-    public BookingController(BookingServiceImpl service) {
+    public BookingController(BookingService service) {
         this.service = service;
     }
 
@@ -27,8 +32,8 @@ public class BookingController {
     @PostMapping("/booking/create")
     public String createBooking(
             @AuthenticationPrincipal User user,
-            @RequestParam double serviceCost) {
-        service.save(serviceCost, user);
+            @RequestParam Car car) {
+        service.save(8.99, user, car);
         return "redirect:/bookings";
     }
 

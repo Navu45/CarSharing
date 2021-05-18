@@ -1,11 +1,5 @@
 <#import "layout.ftl" as page>
 <@page.layout false>
-    <form method="post" action="booking/create">
-        <label>
-            <input type="text" name="serviceCost" placeholder="Service cost">
-        </label>
-        <button class="btn btn-primary mb-2" type="submit">Book the car</button>
-    </form>
     <table class="table">
         <thead>
         <tr>

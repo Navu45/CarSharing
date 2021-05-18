@@ -4,7 +4,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
-import java.util.Collection;
+import java.util.List;
 
 @Entity
 @Table(name = "cars")
@@ -15,8 +15,9 @@ public class Car {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     @ManyToMany
-    private Collection<User> recentUsers;
-    private String location;
+    private List<Booking> recentUsers;
+    private double latitude;
+    private double longitude;
     private String carNumber;
 
 }

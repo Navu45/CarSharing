@@ -3,7 +3,7 @@
     <form action="/user/update" method="post">
         <div class="form-group">
             <label>
-                <input class="form-control" type="text" name="email" value="${user.getUsername()}">
+                <input class="form-control" type="text" readonly name="email" value="${user.getUsername()}">
             </label>
         </div>
         <#assign user_roles = user.getAuthorities()>

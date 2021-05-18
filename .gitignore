@@ -12,3 +12,5 @@ carsharing/carsharing.iml
 carsharing/HELP.md
 
 carsharing/target/
+
+project/src/main/resources/application.properties

@@ -58,7 +58,7 @@
                     </#if>
                 </#if>
                 <li class="nav-item active">
-                    <a class="nav-link" href="/bookings">Book a car</a>
+                    <a class="nav-link" href="/bookings">Your trips</a>
                 </li>
             </ul>
             <span class="navbar-text"><a href="/login">Sign in</a></span>
@@ -67,9 +67,13 @@
             </form>
         </div>
     </nav>
+    <#if isHomePage>
+        <#nested>
+    <#else>
     <div class="container mt-5">
         <#nested>
     </div>
+    </#if>
     </body>
     </html>
 </#macro>

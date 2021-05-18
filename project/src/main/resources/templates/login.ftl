@@ -4,7 +4,7 @@
         <h2>Log in</h2>
         <div class="mb-3 mt-3">
             <#if message?? || error??>
-            <span class="alert alert-danger" role="alert">${message!" " + error!" "}</span>
+            <span class="alert <#if error??>alert-danger</#if> <#if message??>alert-success</#if>" role="alert">${message!" " + error!" "}</span>
             </#if>
         </div>
 
