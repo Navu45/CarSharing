@@ -18,7 +18,7 @@ public class CarService {
 
     public List<Car> getNearbyCars(double lat, double lng) {
         return repository.findCarsByLatitudeBetweenAndLongitudeBetween(
-                lat - 1, lat + 1, lng - 1, lng + 1
+                lat - 0.007, lat + 0.007, lng - 0.007, lng + 0.007
         );
     }
 
@@ -34,8 +34,10 @@ public class CarService {
         for (int i = 0; i < 7; i++) {
             Car car = new Car();
             car.setCarNumber("A111BC197");
-            car.setLatitude(lat + Math.random() * 0.006 * Math.pow(-1.0, Math.round(Math.random() * 10)));
-            car.setLongitude(lng + Math.random() * 0.006 * Math.pow(-1.0, Math.round(Math.random() * 10)));
+            double lat_p = Math.random() * 0.006 * Math.pow(-1.0, Math.round(Math.random() * 10));
+            double lng_p = Math.random() * 0.006 * Math.pow(-1.0, Math.round(Math.random() * 10));
+            car.setLatitude(lat + lat_p);
+            car.setLongitude(lng + lng_p);
             car.setFuel(80);
             save(car);
         }

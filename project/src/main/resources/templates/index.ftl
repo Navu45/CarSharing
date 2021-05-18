@@ -2,11 +2,10 @@
 
 <@page.layout true "Home page | CarSharingApp">
     <div id="map"></div>
-    <#assign
-    user = Session.SPRING_SECURITY_CONTEXT.authentication.principal
-    isAdmin = user.isAdmin()>
     <script>
         let map;
+        let current_marker = null;
+        let current_infowindow = null
 
         function initMap() {
             map = new google.maps.Map(document.getElementById("map"), {
@@ -14,7 +13,17 @@
                 zoom: 15,
             });
 
-            let pos = toCenter(map)
+            toUserPosition(map)
+
+            const locationButton = document.createElement("button");
+            locationButton.textContent = "Pan to Current Location";
+            locationButton.classList.add("custom-map-control-button");
+            map.controls[google.maps.ControlPosition.TOP_CENTER].push(locationButton);
+            locationButton.addEventListener("click", () => {
+                toUserPosition(map)
+            });
+
+            let pos = map.getCenter()
 
             let i = 0
             fetch("/car/close_to_user/" + pos.lat() + "/" + pos.lng())
@@ -24,7 +33,6 @@
                     for (const car of data) {
                         i++
                     }
-
                     if (i === 0) {
                         fetch("/car/init/"+ pos.lat() + "/" + pos.lng(),
                             {
@@ -38,18 +46,9 @@
                     }
                 })
 
-            const locationButton = document.createElement("button");
-            locationButton.textContent = "Pan to Current Location";
-            locationButton.classList.add("custom-map-control-button");
-            map.controls[google.maps.ControlPosition.TOP_CENTER].push(locationButton);
-            locationButton.addEventListener("click", () => {
-                toCenter(map)
-            });
-
             fetch("/car/close_to_user/" + pos.lat() + "/" + pos.lng())
                 .then(response => response.json())
                 .then(data => {
-                    let i = 0
                     for (const car of data) {
                         const contentString =
                             '<div id="content">' +
@@ -70,12 +69,27 @@
                             content: contentString,
                         });
 
+                        infowindow.addListener("closeclick", () => {
+                            current_marker = null
+                            current_infowindow = null
+                        })
+
                         const marker = new google.maps.Marker({
                             position: {lat: car.latitude, lng: car.longitude},
                             map
                         });
+
                         marker.addListener("click", () => {
-                            infowindow.open(map, marker);
+                            if (current_marker == null) {
+                                infowindow.open(map, marker);
+                                current_marker = marker
+                                current_infowindow = infowindow
+                            }
+                            else if (current_marker === marker){
+                                infowindow.close()
+                                current_marker = null
+                                current_infowindow = null
+                            }
                         });
                     }
                 })
@@ -86,7 +100,7 @@
             //})
         }
 
-        function toCenter(map) {
+        function toUserPosition(map) {
             if (navigator.geolocation) {
                 navigator.geolocation.getCurrentPosition(
                     (position) => {
